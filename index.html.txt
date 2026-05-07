@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Creditexpress | Prêt professionnel 2% de 3000$ à 100000$</title>
+    <meta name="description" content="Creditexpress : prêt professionnel de 3000$ à 100000$ à 2% par an, sans frais cachés. Simulation gratuite en 2 minutes. Accompagnement personnalisé.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #FF6600;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #FF6600;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 12px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background-color: #FF6600;
+            border-color: #FF6600;
+        }
+
+        .lang-btn:hover {
+            background-color: rgba(255,102,0,0.3);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #003366 0%, #1a4d8a 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: #FF6600;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05a00;
+            transform: scale(1.02);
+        }
+
+        /* Simulator */
+        .simulator {
+            background-color: #F5F5F5;
+            padding: 60px 0;
+        }
+
+        .sim-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .sim-card h2 {
+            color: #003366;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+            accent-color: #FF6600;
+        }
+
+        .amount-value, .duration-value {
+            font-weight: 700;
+            color: #FF6600;
+            font-size: 1.3rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #DDD;
+            font-size: 1rem;
+        }
+
+        .result {
+            background: #003366;
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result .monthly {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        /* Stats */
+        .stats {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #003366;
+        }
+
+        /* Steps */
+        .steps {
+            background: #F9F9F9;
+            padding: 60px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            background: #FF6600;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .test-card {
+            background: #F5F5F5;
+            border-radius: 20px;
+            padding: 24px;
+            transition: transform 0.2s;
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .test-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+
+        .test-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .test-city {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .test-quote {
+            font-style: italic;
+            margin: 12px 0;
+        }
+
+        /* FAQ */
+        .faq {
+            background: #F5F5F5;
+            padding: 60px 0;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #444;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px 20px;
+            max-height: 300px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1A1A1A;
+            color: #CCC;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #FF6600;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .header .container { flex-direction: column; }
+            .sim-card { padding: 24px; }
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            margin-top: 20px;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">Credite<span>xpress</span></div>
+        <div class="nav">
+            <a href="#" data-i18n="nav.home">Accueil</a>
+            <a href="#" data-i18n="nav.apply">Faire ma demande</a>
+            <a href="#" data-i18n="nav.testimonials">Témoignages</a>
+            <a href="#" data-i18n="nav.donate">Donner</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="fr">🇫🇷 FR</button>
+            <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+            <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1 data-i18n="hero.title">Refusé par une banque ? <span style="color:#FF6600;">On vous dit oui.</span></h1>
+            <p data-i18n="hero.sub">Prêt professionnel de 3 000 $ à 100 000 $ à <strong>2% par an</strong>. Accompagnement gratuit. Sans frais cachés.</p>
+            <button class="btn-primary" data-i18n="hero.cta">Simuler mon éligibilité →</button>
+        </div>
+    </section>
+
+    <section class="simulator" id="simulator">
+        <div class="container">
+            <div class="sim-card">
+                <h2 data-i18n="sim.title">Simulez votre prêt</h2>
+                <p data-i18n="sim.sub">2 minutes, sans engagement</p>
+                <div class="form-group">
+                    <label data-i18n="sim.amount">Montant du prêt : <span id="amountVal" class="amount-value">3000</span> $</label>
+                    <input type="range" id="loanAmount" min="3000" max="100000" step="1000" value="3000">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="sim.duration">Durée : <span id="durationVal" class="duration-value">12</span> mois</label>
+                    <input type="range" id="loanDuration" min="12" max="60" step="6" value="12">
+                </div>
+                <div class="result">
+                    <p data-i18n="sim.monthlyLabel">Mensualité estimée</p>
+                    <div class="monthly" id="monthlyResult">0 $</div>
+                    <p data-i18n="sim.rateInfo">Taux annuel fixe 2%</p>
+                </div>
+                <div class="disclaimer" data-i18n="sim.disclaimer">💡 Simulation sous réserve d'étude de dossier. Aucun frais avant accord.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500 000+</div>
+                    <div data-i18n="stats.projects">projets accompagnés</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <div data-i18n="stats.employment">retour à l'emploi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div data-i18n="stats.satisfied">clients satisfaits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0$</div>
+                    <div data-i18n="stats.fees">frais avant accord</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps">
+        <div class="container">
+            <h2 style="text-align:center; color:#003366;" data-i18n="steps.title">Comment ça marche ?</h2>
+            <div class="steps-grid">
+                <div class="step-card"><div class="step-number">1</div><h3 data-i18n="step1.title">Simulation gratuite</h3><p data-i18n="step1.desc">2 minutes en ligne</p></div>
+                <div class="step-card"><div class="step-number">2</div><h3 data-i18n="step2.title">Rendez-vous</h3><p data-i18n="step2.desc">Conseiller dédié (en ligne ou présentiel)</p></div>
+                <div class="step-card"><div class="step-number">3</div><h3 data-i18n="step3.title">Étude dossier</h3><p data-i18n="step3.desc">Réponse sous 48h</p></div>
+                <div class="step-card"><div class="step-number">4</div><h3 data-i18n="step4.title">Versement</h3><p data-i18n="step4.desc">Fonds disponibles sous 72h</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 style="text-align:center; color:#003366;" data-i18n="testi.title">Ils nous font confiance</h2>
+            <div class="test-grid">
+                <div class="test-card"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop" class="test-img" alt="Karima"><div class="test-name">Karima</div><div class="test-city">Lyon, France</div><div class="test-quote">"3 refus bancaires, puis Creditexpress. Aujourd'hui j'emploie 2 personnes."</div></div>
+                <div class="test-card"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop" class="test-img" alt="Miguel"><div class="test-name">Miguel</div><div class="test-city">Barcelone, Espagne</div><div class="test-quote">"Prêt à 2% clair et rapide. Mon restaurant a pu ouvrir."</div></div>
+                <div class="test-card"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop" class="test-img" alt="Sophia"><div class="test-name">Sophia</div><div class="test-city">Montréal, Canada</div><div class="test-quote">"Sans frais cachés, exactement ce qu'on m'a promis."</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2 style="text-align:center; color:#003366; margin-bottom: 40px;" data-i18n="faq.title">Questions fréquentes</h2>
+            <div class="faq-item"><button class="faq-question" data-i18n="faq.q1">✅ Puis-je obtenir un prêt sans apport ?</button><div class="faq-answer" data-i18n="faq.a1">Oui, le microcrédit social ne demande pas d'apport personnel. L'étude se base sur votre projet et votre motivation.</div></div>
+            <div class="faq-item"><button class="faq-question" data-i18n="faq.q2">💰 Y a-t-il des frais cachés ?</button><div class="faq-answer" data-i18n="faq.a2">Non. Aucun frais avant l'accord de prêt. L'accompagnement est entièrement gratuit.</div></div>
+            <div class="faq-item"><button class="faq-question" data-i18n="faq.q3">📋 Quels justificatifs fournir ?</button><div class="faq-answer" data-i18n="faq.a3">Pièce d'identité, justificatif de domicile, description du projet. Liste précise après simulation.</div></div>
+            <div class="faq-item"><button class="faq-question" data-i18n="faq.q4">⏱️ Quel est le délai de réponse ?</button><div class="faq-answer" data-i18n="faq.a4">Sous 48 heures ouvrées après dossier complet.</div></div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 Creditexpress - <span data-i18n="footer.tag">Prêt professionnel solidaire</span></p>
+        <p>💡 <span data-i18n="footer.zero">0$ de frais avant accord</span> | <a href="#">Mentions légales</a> | <a href="#" data-i18n="footer.donate">Faire un don</a></p>
+    </div>
+</footer>
+
+<script>
+    // Simulation
+    const amountSlider = document.getElementById('loanAmount');
+    const durationSlider = document.getElementById('loanDuration');
+    const amountVal = document.getElementById('amountVal');
+    const durationVal = document.getElementById('durationVal');
+    const monthlyResult = document.getElementById('monthlyResult');
+
+    function calculateMonthly() {
+        let P = parseFloat(amountSlider.value);
+        let months = parseInt(durationSlider.value);
+        let annualRate = 0.02;
+        let monthlyRate = annualRate / 12;
+        let monthly = 0;
+        if (monthlyRate === 0) {
+            monthly = P / months;
+        } else {
+            monthly = (P * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+        }
+        monthlyResult.innerText = monthly.toFixed(2) + " $";
+        amountVal.innerText = P;
+        durationVal.innerText = months;
+    }
+
+    amountSlider.addEventListener('input', calculateMonthly);
+    durationSlider.addEventListener('input', calculateMonthly);
+    calculateMonthly();
+
+    // FAQ accordéon
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        btn.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+
+    // Multi-langue complet
+    const translations = {
+        fr: {
+            "nav.home": "Accueil", "nav.apply": "Faire ma demande", "nav.testimonials": "Témoignages", "nav.donate": "Donner",
+            "hero.title": "Refusé par une banque ? On vous dit oui.", "hero.sub": "Prêt professionnel de 3 000 $ à 100 000 $ à 2% par an. Accompagnement gratuit. Sans frais cachés.", "hero.cta": "Simuler mon éligibilité →",
+            "sim.title": "Simulez votre prêt", "sim.sub": "2 minutes, sans engagement", "sim.amount": "Montant du prêt :", "sim.duration": "Durée :", "sim.monthlyLabel": "Mensualité estimée", "sim.rateInfo": "Taux annuel fixe 2%", "sim.disclaimer": "💡 Simulation sous réserve d'étude de dossier. Aucun frais avant accord.",
+            "stats.projects": "projets accompagnés", "stats.employment": "retour à l'emploi", "stats.satisfied": "clients satisfaits", "stats.fees": "frais avant accord",
+            "steps.title": "Comment ça marche ?", "step1.title": "Simulation gratuite", "step1.desc": "2 minutes en ligne", "step2.title": "Rendez-vous", "step2.desc": "Conseiller dédié (en ligne ou présentiel)", "step3.title": "Étude dossier", "step3.desc": "Réponse sous 48h", "step4.title": "Versement", "step4.desc": "Fonds disponibles sous 72h",
+            "testi.title": "Ils nous font confiance",
+            "faq.title": "Questions fréquentes", "faq.q1": "✅ Puis-je obtenir un prêt sans apport ?", "faq.a1": "Oui, le microcrédit social ne demande pas d'apport personnel.", "faq.q2": "💰 Y a-t-il des frais cachés ?", "faq.a2": "Non. Aucun frais avant l'accord.", "faq.q3": "📋 Quels justificatifs ?", "faq.a3": "Pièce d'identité, justificatif de domicile, projet.", "faq.q4": "⏱️ Délai de réponse ?", "faq.a4": "Sous 48h.",
+            "footer.tag": "Prêt professionnel solidaire", "footer.zero": "0$ de frais avant accord", "footer.donate": "Faire un don"
+        },
+        en: {
+            "nav.home": "Home", "nav.apply": "Apply now", "nav.testimonials": "Testimonials", "nav.donate": "Donate",
+            "hero.title": "Rejected by a bank? We say yes.", "hero.sub": "Business loan from $3,000 to $100,000 at 2% per year. Free support. No hidden fees.", "hero.cta": "Check eligibility →",
+            "sim.title": "Simulate your loan", "sim.sub": "2 minutes, no obligation", "sim.amount": "Loan amount:", "sim.duration": "Duration:", "sim.monthlyLabel": "Estimated monthly payment", "sim.rateInfo": "Fixed annual rate 2%", "sim.disclaimer": "💡 Subject to approval. No fees before agreement.",
+            "stats.projects": "projects supported", "stats.employment": "return to employment", "stats.satisfied": "satisfied clients", "stats.fees": "fees before approval",
+            "steps.title": "How it works?", "step1.title": "Free simulation", "step1.desc": "2 minutes online", "step2.title": "Appointment", "step2.desc": "Dedicated advisor", "step3.title": "Review", "step3.desc": "Answer within 48h", "step4.title": "Disbursement", "step4.desc": "Funds within 72h",
+            "testi.title": "They trust us",
+            "faq.title": "FAQ", "faq.q1": "✅ Can I get a loan without a down payment?", "faq.a1": "Yes, social microcredit does not require personal contribution.", "faq.q2": "💰 Any hidden fees?", "faq.a2": "No fees before loan approval.", "faq.q3": "📋 What documents?", "faq.a3": "ID, proof of address, project description.", "faq.q4": "⏱️ Response time?", "faq.a4": "Within 48 hours.",
+            "footer.tag": "Solidarity business loan", "footer.zero": "$0 fees before approval", "footer.donate": "Donate"
+        },
+        es: {
+            "nav.home": "Inicio", "nav.apply": "Solicitar", "nav.testimonials": "Testimonios", "nav.donate": "Donar",
+            "hero.title": "¿Rechazado por un banco? Nosotros decimos sí.", "hero.sub": "Préstamo profesional de $3,000 a $100,000 al 2% anual. Acompañamiento gratuito. Sin comisiones ocultas.", "hero.cta": "Simular mi elegibilidad →",
+            "sim.title": "Simula tu préstamo", "sim.sub": "2 minutos, sin compromiso", "sim.amount": "Monto del préstamo:", "sim.duration": "Plazo:", "sim.monthlyLabel": "Cuota mensual estimada", "sim.rateInfo": "Tasa fija anual 2%", "sim.disclaimer": "💡 Sujeto a estudio. Sin gastos antes de la aprobación.",
+            "stats.projects": "proyectos acompañados", "stats.employment": "retorno al empleo", "stats.satisfied": "clientes satisfechos", "stats.fees": "sin gastos previos",
+            "steps.title": "¿Cómo funciona?", "step1.title": "Simulación gratis", "step1.desc": "2 minutos online", "step2.title": "Cita", "step2.desc": "Asesor dedicado", "step3.title": "Estudio", "step3.desc": "Respuesta en 48h", "step4.title": "Desembolso", "step4.desc": "Fondos en 72h",
+            "testi.title": "Confían en nosotros",
+            "faq.title": "Preguntas frecuentes", "faq.q1": "✅ ¿Préstamo sin aporte inicial?", "faq.a1": "Sí, el microcrédito social no requiere aporte personal.", "faq.q2": "💰 ¿Comisiones ocultas?", "faq.a2": "No, cero gastos antes de la aprobación.", "faq.q3": "📋 ¿Qué documentos?", "faq.a3": "Identificación, comprobante de domicilio, proyecto.", "faq.q4": "⏱️ ¿Plazo de respuesta?", "faq.a4": "En menos de 48h.",
+            "footer.tag": "Préstamo profesional solidario", "footer.zero": "0$ de gastos previos", "footer.donate": "Donar"
+        }
+    };
+
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translations[lang][key];
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
+            }
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            setLanguage(lang);
+        });
+    });
+    setLanguage('fr');
+</script>
+</body>
+</html>
